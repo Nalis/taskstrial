@@ -15,7 +15,7 @@ module.exports = function(environment) {
 
     'simple-auth-devise': {
       resourceName: 'user',
-      serverTokenEndpoint: 'http://localhost:3000/users/sign_in'
+      serverTokenEndpoint: 'http://taskstrialservice.valentinaitken.com/users/sign_in'
     },
 
     APP: {
