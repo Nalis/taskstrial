@@ -1,0 +1,26 @@
+{{#link-to 'tasks.new'}}<button class="btn">New task</button>{{/link-to}}
+<br>
+<br>
+
+{{input value=theFilter type='text' placeholder='Filter task' class='form-control'}}
+<!---{-{#link-to 'task' this}}-->
+<table class="table table-striped">
+  <tbody>
+  <tr>
+    <th {{action "sortBy" "title"}}>Title</th>
+    <th {{action "sortBy" "description"}}>Description</th>
+    <th>Actions</th>
+  </tr>
+  {{#each task in filterTasks}}
+    <tr>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>
+        <span class="edit" {{action 'edit' this}}></span>
+        <span class="remove" {{action 'delete' this}}></span>
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+{{outlet}}
