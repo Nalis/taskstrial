@@ -11,7 +11,7 @@ var TasksController = Ember.ArrayController.extend({
   },
 
   checkFilterMatch: function(theObject, str) {
-    var field, match;
+    var match;
     match = false;
 
     ['title', 'description'].forEach(function(field) {
@@ -26,7 +26,7 @@ var TasksController = Ember.ArrayController.extend({
 
   filterTasks: (function() {
     return this.get("arrangedContent").filter((function(_this) {
-      return function(theObject, index, enumerable) {
+      return function(theObject) {
         if (_this.get("theFilter")) {
           return _this.checkFilterMatch(theObject, _this.get("theFilter"));
         } else {
