@@ -10,11 +10,10 @@ var TaskNewRoute = Ember.Route.extend({
         self.transitionTo('tasks');
       }
 
-      function failure(reason) {
+      function failure() {
         // handle the error
       }
 
-      console.log(task._attributes);
       task.save().then(transitionToTasks).catch(failure);
     },
     cancel: function() {
