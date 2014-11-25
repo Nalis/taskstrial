@@ -8,9 +8,17 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex5-collapse">
     <ul class="nav navbar-nav">
+      <li>
       {{#link-to 'protected' tagName='li'}}
         <a style="cursor: pointer">Protected Page</a>
       {{/link-to}}
+      </li>
+
+      {{#if session.isAuthenticated}}
+        <li>
+        {{#link-to 'tasks'}}Tasks{{/link-to}}
+        </li>
+      {{/if}}
     </ul>
     {{! display logout button when the session is authenticated, login button otherwise }}
     {{#if session.isAuthenticated}}
