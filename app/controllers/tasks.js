@@ -6,7 +6,12 @@ var TasksController = Ember.ArrayController.extend({
 
   actions: {
     sortBy: function(property) {
-      this.set("sortProperties", [property]);
+      if (this.get("sortProperties")[0] === property) {
+        this.toggleProperty("sortAscending");
+      } else {
+        this.set("sortAscending", true);
+        this.set("sortProperties", [property]);
+      }
     }
   },
 
@@ -15,8 +20,6 @@ var TasksController = Ember.ArrayController.extend({
     match = false;
 
     ['title', 'description'].forEach(function(field) {
-      console.log('Hi' + field);
-      console.log(theObject.get(field));
       if (theObject.get(field).toString().toUpperCase().slice(0, str.length) === str.toUpperCase()) {
         match = true;
       }
@@ -34,7 +37,23 @@ var TasksController = Ember.ArrayController.extend({
         }
       };
     })(this));
-  }).property("theFilter", "sortProperties")
+  }).property("theFilter", "sortProperties", "sortAscending", 'model.@each'),
+
+  sortedOnTitle: (function() {
+    return this.get("sortProperties").get("0") === "title";
+  }).property("sortProperties"),
+
+  sortedOnDescription: (function() {
+    return this.get("sortProperties").get("0") === "description";
+  }).property("sortProperties"),
+
+  glyphiconDirection: (function() {
+    if (this.get("sortAscending")) {
+      return "glyphicon-chevron-down";
+    } else {
+      return "glyphicon-chevron-up";
+    }
+  }).property("sortAscending")
 });
 
 export default TasksController;
