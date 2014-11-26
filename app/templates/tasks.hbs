@@ -9,12 +9,14 @@
   <tr>
     <th {{action "sortBy" "title"}}>Title</th>
     <th {{action "sortBy" "description"}}>Description</th>
+    <th {{action "sortBy" "owner"}}>Owner</th>
     <th>Actions</th>
   </tr>
   {{#each task in filterTasks}}
     <tr>
       <td>{{task.title}}</td>
       <td>{{task.description}}</td>
+      <td>{{task.user.name}}</td>
       <td>
         <span class="edit" {{action 'edit' this}}></span>
         <span class="remove" {{action 'delete' this}}></span>

@@ -14,13 +14,23 @@ var TaskNewRoute = Ember.Route.extend({
         // handle the error
       }
 
-      task.save().then(transitionToTasks).catch(failure);
+      this.store.find('user', task.user_id).then(function(user) {
+        console.log(user.get('id'));
+        task.set('user', user);
+        task.save().then(transitionToTasks).catch(failure);
+      });
     },
     cancel: function() {
       this.transitionTo('tasks');
       return true;
     }
   },
+
+  setupController: function(controller, model) {
+    controller.set('content', model);
+    controller.set('users', this.store.findAll('user'));
+  },
+
   model: function() {
     // provide a new photo to the template
     return this.store.createRecord('task');

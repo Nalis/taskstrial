@@ -19,8 +19,12 @@ var TasksController = Ember.ArrayController.extend({
     var match;
     match = false;
 
-    ['title', 'description'].forEach(function(field) {
-      if (theObject.get(field).toString().toUpperCase().slice(0, str.length) === str.toUpperCase()) {
+    ['title', 'description', 'user'].forEach(function(field) {
+      if(field === 'user') {
+        if(theObject.get(field) && theObject.get(field).get('name').toString().toUpperCase().slice(0, str.length) === str.toUpperCase()) {
+          match = true;
+        }
+      } else if (theObject.get(field).toString().toUpperCase().slice(0, str.length) === str.toUpperCase()) {
         match = true;
       }
     });
