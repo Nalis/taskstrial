@@ -14,8 +14,7 @@ var TaskNewRoute = Ember.Route.extend({
         // handle the error
       }
 
-      this.store.find('user', task.user_id).then(function(user) {
-        console.log(user.get('id'));
+      this.store.find('user', task.get('user_id')).then(function(user) {
         task.set('user', user);
         task.save().then(transitionToTasks).catch(failure);
       });
