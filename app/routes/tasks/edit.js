@@ -1,9 +1,8 @@
 import Ember from 'ember';
-//import Task from 'taskstrial-frontend/models/task';
 
-var TaskNewRoute = Ember.Route.extend({
+export default Ember.Route.extend({
   actions: {
-    create: function(task) {
+    update: function (task) {
       var self = this;
 
       function transitionToTasks() {
@@ -11,26 +10,25 @@ var TaskNewRoute = Ember.Route.extend({
       }
 
       function failure() {
-        // handle the error
+        alert('failed');
       }
 
-      task.save().then(transitionToTasks).catch(failure);
+      task.save().then(transitionToTasks);
     },
-    cancel: function() {
+    cancel: function () {
       this.transitionTo('tasks');
       return true;
     }
   },
+  model: function(params) {
+    return this.store.find('task', params.task_id);
+  },
 
   setupController: function(controller, model) {
     controller.set('content', model);
+    if(model.get('user')) {
+      controller.set('user_id', model.get('user').get('id'));
+    }
     controller.set('users', this.store.findAll('user'));
-  },
-
-  model: function() {
-    // provide a new photo to the template
-    return this.store.createRecord('task');
   }
 });
-
-export default TaskNewRoute;

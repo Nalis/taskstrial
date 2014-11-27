@@ -13,7 +13,8 @@ Router.map(function() {
   this.route('protected');
   this.resource('user', { path: 'users/:user_id' }, function() { });
 
-  this.resource('tasks', {path:'/tasks'});
+  this.resource('tasks');
+  this.route('tasks.edit', {path: '/tasks/:task_id/edit'});
   this.resource('tasks.new', {path:'/tasks/new'});
 });
 

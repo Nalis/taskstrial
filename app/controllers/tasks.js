@@ -12,6 +12,29 @@ var TasksController = Ember.ArrayController.extend({
         this.set("sortAscending", true);
         this.set("sortProperties", [property]);
       }
+    },
+    edit: function(task) {
+      var self = this;
+
+      function transitionToTasks() {
+        self.transitionTo('tasks');
+      }
+
+      function failure() {
+        // handle the error
+      }
+
+      this.store.find('user', task.get('user_id')).then(function(user) {
+        task.set('user', user);
+        task.save().then(transitionToTasks).catch(failure);
+      });
+    },
+    cancel: function() {
+      this.transitionTo('tasks');
+      return true;
+    },
+    destroy: function(task) {
+      task.destroyRecord();
     }
   },
 

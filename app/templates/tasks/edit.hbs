@@ -1,0 +1,10 @@
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Edit task</legend>
+    {{partial 'tasks/form'}}
+  </fieldset>
+</form>
+<div class="btn-group">
+  <button class="btn btn-large btn-primary" {{action 'update' this}}>Create</button>
+  <button class="btn btn-large btn-danger" {{action 'cancel' this}}>Cancel</button>
+</div>
