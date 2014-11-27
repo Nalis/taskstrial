@@ -15,9 +15,9 @@
       </li>
 
       {{#if session.isAuthenticated}}
-        <li>
-        {{#link-to 'tasks'}}Tasks{{/link-to}}
-        </li>
+        {{#link-to 'tasks' tagName='li'}}
+        <a style="cursor: pointer">Tasks</a>
+        {{/link-to}}
       {{/if}}
     </ul>
     {{! display logout button when the session is authenticated, login button otherwise }}
